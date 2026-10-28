@@ -1,0 +1,312 @@
+:root {
+    --miel: #F6B93B;
+    --ambar: #E09F1F;
+    --cafe: #4A3320;
+    --mantequilla: #FFF4CC;
+    --rosa: #F4A6B8;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--cafe);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--mantequilla);
+    /* panal de abejas de fondo */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34zM28 100L0 84V66l28 16 28-16v18z' fill='none' stroke='%23F6B93B' stroke-opacity='.3' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.display,
+h1,
+h2 {
+    font-family: 'Fredoka', sans-serif;
+}
+
+.pantalla {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: opacity .6s;
+}
+
+.pantalla.oculto {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.abeja {
+    width: 64px;
+    height: 64px;
+}
+
+/* ---------- SOBRE ---------- */
+.pista {
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+}
+
+.sobre {
+    position: relative;
+    width: min(86vw, 340px);
+    aspect-ratio: 1.4 / 1;
+    background: var(--ambar);
+    border-radius: 12px;
+    perspective: 900px;
+    box-shadow: 0 10px 0 rgba(74, 51, 32, .18);
+    cursor: pointer;
+}
+
+.sobre>* {
+    position: absolute;
+}
+
+.tapa {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58%;
+    background: var(--miel);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    z-index: 3;
+    border-radius: 12px 12px 0 0;
+}
+
+.frente {
+    inset: 0;
+    background: var(--miel);
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 12px;
+    z-index: 4;
+}
+
+.carta {
+    left: 7%;
+    right: 7%;
+    top: 8%;
+    bottom: 8%;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.sello {
+    width: 56px;
+    height: 56px;
+    left: calc(50% - 28px);
+    top: calc(58% - 34px);
+    z-index: 5;
+    background: #fff;
+    border-radius: 50%;
+    border: 3px solid var(--cafe);
+    padding: 3px;
+    transition: opacity .3s;
+}
+
+.sobre.abierto .tapa {
+    transform: rotateX(180deg);
+    z-index: 1;
+    transition: transform .7s ease, z-index 0s .35s;
+}
+
+.sobre.abierto .sello {
+    opacity: 0;
+}
+
+.sobre.abierto .carta {
+    transform: translateY(-62%);
+    transition: transform .9s ease .7s;
+}
+
+.btn-abrir {
+    background: var(--cafe);
+    color: #fff;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.15rem;
+    border-radius: 999px;
+    padding: .75rem 2.25rem;
+}
+
+.btn-abrir:hover {
+    background: #33231a;
+    color: #fff;
+}
+
+.btn-abrir:focus-visible,
+.sobre:focus-visible {
+    outline: 3px solid var(--rosa);
+    outline-offset: 3px;
+}
+
+/* ---------- INVITACIÓN ---------- */
+#invitacion.entra .tarjeta {
+    animation: aparece .8s ease both;
+}
+
+@keyframes aparece {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.tarjeta {
+    position: relative;
+    z-index: 2;
+    max-width: 440px;
+    background: #fff;
+    border: 3px solid var(--miel);
+    border-radius: 32px;
+    padding: 1.75rem 1.5rem 2rem;
+    box-shadow: 0 10px 0 var(--ambar);
+}
+
+.heroe {
+    width: 96px;
+    height: 96px;
+    animation: zumba 2.4s ease-in-out infinite;
+}
+
+@keyframes zumba {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(4deg);
+    }
+}
+
+.nombre {
+    font-size: clamp(2.6rem, 12vw, 3.6rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.05;
+}
+
+.corazones {
+    color: var(--rosa);
+    margin: .5rem 0;
+}
+
+.corazones svg {
+    width: 24px;
+    height: 24px;
+    margin: 0 3px;
+}
+
+.corazones svg:nth-child(2) {
+    width: 32px;
+    height: 32px;
+}
+
+.invita {
+    max-width: 30ch;
+    margin: .75rem auto 0;
+}
+
+.unidad {
+    background: var(--mantequilla);
+    border-radius: 18px;
+    padding: .6rem .1rem;
+}
+
+.unidad b {
+    display: block;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.9rem;
+    line-height: 1.1;
+}
+
+.unidad span {
+    font-size: .85rem;
+}
+
+.datos li {
+    margin-bottom: .25rem;
+}
+
+/* abejitas volando por el fondo */
+#abejas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.vuela {
+    position: absolute;
+    animation: vuelo 9s ease-in-out infinite;
+}
+
+@keyframes vuelo {
+    0% {
+        transform: translate(0, 0) rotate(-8deg);
+    }
+
+    25% {
+        transform: translate(24px, -30px) rotate(8deg);
+    }
+
+    50% {
+        transform: translate(-10px, -12px) rotate(-6deg);
+    }
+
+    75% {
+        transform: translate(-28px, -34px) rotate(10deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-8deg);
+    }
+}
+
+/* corazones que suben al abrir */
+.corazon-flota {
+    position: fixed;
+    bottom: -40px;
+    color: var(--rosa);
+    z-index: 10;
+    pointer-events: none;
+    animation: sube linear forwards;
+}
+
+@keyframes sube {
+    to {
+        transform: translateY(-115vh) translateX(var(--dx, 0));
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .heroe,
+    .vuela,
+    .corazon-flota,
+    #invitacion.entra .tarjeta {
+        animation: none;
+    }
+
+    .sobre.abierto .carta,
+    .sobre.abierto .tapa {
+        transition-duration: .01s;
+        transition-delay: 0s;
+    }
+}
